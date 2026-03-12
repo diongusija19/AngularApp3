@@ -1,7 +1,5 @@
 <<<<<<< HEAD
 # AngularApp3
-=======
-# AngularApp3
 
 This repository has two project directories:
 
@@ -28,8 +26,4 @@ Routes:
 4. API endpoint will be available at:
    `http://localhost/AngularApp3/backend/api/books.php`
 
-## Notes
 
-- Angular `BookService` is CRUD-ready with `getBooks`, `getBook`, `addBook`, `updateBook`, and `deleteBook` methods.
-- Current UI demonstrates read and create flows via `/list` and `/add`.
->>>>>>> 1810068 (Build Angular books app with PHP MySQL backend)
