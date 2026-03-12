@@ -1,0 +1,33 @@
+<section class="page">
+  <header class="header">
+    <h1>Add Book</h1>
+    <a routerLink="/list" class="btn-secondary">Back to List</a>
+  </header>
+
+  <form [formGroup]="bookForm" (ngSubmit)="onSubmit()" class="form">
+    <label>
+      Title
+      <input formControlName="title" type="text" />
+    </label>
+
+    <label>
+      Author
+      <input formControlName="author" type="text" />
+    </label>
+
+    <label>
+      Description
+      <textarea formControlName="description" rows="4"></textarea>
+    </label>
+
+    <label>
+      Published Year
+      <input formControlName="publishedYear" type="number" min="0" />
+    </label>
+
+    <p class="error" *ngIf="bookForm.invalid && bookForm.touched">Please complete required fields.</p>
+    <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+    <button type="submit" [disabled]="isSubmitting">{{ isSubmitting ? 'Saving...' : 'Save Book' }}</button>
+  </form>
+</section>

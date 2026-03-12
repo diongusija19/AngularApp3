@@ -1,0 +1,9 @@
+# Frontend artifacts
+/frontend/node_modules/
+/frontend/dist/
+/frontend/.angular/
+/frontend/.npm-cache/
+
+# Logs and OS files
+*.log
+.DS_Store
