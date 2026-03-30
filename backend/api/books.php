@@ -23,6 +23,7 @@ function validateBook(array $book): bool
         && trim($book['description']) !== '';
 }
 
+// Route the single endpoint by HTTP verb so Angular can call one URL for CRUD operations.
 if ($method === 'GET') {
     if ($id) {
         $stmt = $connection->prepare('SELECT id, title, author, description, published_year AS publishedYear, created_at AS createdAt FROM books WHERE id = ?');

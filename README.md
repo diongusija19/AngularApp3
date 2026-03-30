@@ -1,9 +1,8 @@
-<<<<<<< HEAD
 # AngularApp3
 
 This repository has two project directories:
 
-- `frontend`: Angular app with routing and HTTP data access.
+- `frontend`: Angular app with routing, forms, and HTTP data access.
 - `backend`: PHP + MySQL API for books data.
 
 ## Frontend setup
@@ -17,13 +16,16 @@ Routes:
 
 - `/list`: list all books
 - `/add`: add a new book
+- `/delete`: delete an existing book
 
 ## Backend setup (XAMPP)
 
-1. Copy this `backend` folder into `XAMPP/htdocs/AngularApp3/backend` (or keep the same path if this repo is already under htdocs).
+1. Copy this `backend` folder into `XAMPP/htdocs/AngularApp3/backend` or keep the repo itself under `htdocs/AngularApp3`.
 2. Start Apache and MySQL in XAMPP.
-3. Run `backend/sql/books.sql` in phpMyAdmin to create schema/data.
-4. API endpoint will be available at:
-   `http://localhost/AngularApp3/backend/api/books.php`
+3. Run `backend/sql/books.sql` in phpMyAdmin to create the schema and sample data.
+4. Confirm the API is reachable at `http://localhost/AngularApp3/backend/api/books.php`.
 
+## Notes
 
+- Angular `BookService` exposes `getBooks`, `getBook`, `addBook`, `updateBook`, and `deleteBook`.
+- The current UI demonstrates read, create, and delete flows against the PHP/MySQL backend.

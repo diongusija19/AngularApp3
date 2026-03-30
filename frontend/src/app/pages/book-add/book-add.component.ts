@@ -28,6 +28,7 @@ export class BookAddComponent {
     private readonly router: Router
   ) {}
 
+  // Submit only valid form data so the backend receives the required fields.
   onSubmit(): void {
     if (this.bookForm.invalid) {
       this.bookForm.markAllAsTouched();

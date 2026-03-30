@@ -1,0 +1,29 @@
+<section class="page">
+  <header class="header">
+    <div>
+      <h1>Delete Books</h1>
+      <p>Select a book to remove it from the database.</p>
+    </div>
+    <a routerLink="/list" class="btn-secondary">Back to List</a>
+  </header>
+
+  <p *ngIf="isLoading">Loading books...</p>
+  <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+  <p class="success" *ngIf="successMessage">{{ successMessage }}</p>
+
+  <ul *ngIf="!isLoading && books.length > 0" class="book-list">
+    <li *ngFor="let book of books" class="book-item">
+      <div class="book-copy">
+        <h2>{{ book.title }}</h2>
+        <p><strong>Author:</strong> {{ book.author }}</p>
+        <p><strong>Description:</strong> {{ book.description }}</p>
+        <p *ngIf="book.publishedYear"><strong>Year:</strong> {{ book.publishedYear }}</p>
+      </div>
+      <button type="button" (click)="deleteBook(book)" [disabled]="isDeleting">
+        {{ isDeleting ? 'Deleting...' : 'Delete Book' }}
+      </button>
+    </li>
+  </ul>
+
+  <p *ngIf="!isLoading && books.length === 0">No books are available to delete.</p>
+</section>
