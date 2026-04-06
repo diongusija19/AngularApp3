@@ -14,16 +14,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have the 'angularapp3' title`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('angularapp3');
-  });
-
-  it('should render title', () => {
+  it('should render the navigation links', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, angularapp3');
+    const links = compiled.querySelectorAll('.top-nav a');
+
+    expect(links.length).toBe(4);
+    expect(compiled.textContent).toContain('Book List');
+    expect(compiled.textContent).toContain('Add Book');
+    expect(compiled.textContent).toContain('Update Book');
+    expect(compiled.textContent).toContain('Delete Book');
   });
 });

@@ -16,6 +16,7 @@ Routes:
 
 - `/list`: list all books
 - `/add`: add a new book
+- `/update`: update an existing book and replace/remove its uploaded cover image
 - `/delete`: delete an existing book
 
 ## Backend setup (XAMPP)
@@ -28,4 +29,5 @@ Routes:
 ## Notes
 
 - Angular `BookService` exposes `getBooks`, `getBook`, `addBook`, `updateBook`, and `deleteBook`.
-- The current UI demonstrates read, create, and delete flows against the PHP/MySQL backend.
+- Create and update requests use `FormData` so the app can upload optional cover images to `backend/uploads`.
+- The UI demonstrates read, create, update, delete, and file upload flows against the PHP/MySQL backend.

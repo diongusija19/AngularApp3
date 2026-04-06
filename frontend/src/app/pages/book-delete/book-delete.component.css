@@ -35,6 +35,13 @@
   flex: 1;
 }
 
+.book-cover {
+  width: 110px;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
 button {
   width: fit-content;
   background: #b42318;

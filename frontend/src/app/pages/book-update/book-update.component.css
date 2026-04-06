@@ -8,38 +8,62 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 1rem;
   margin-bottom: 1rem;
 }
 
 .form {
   display: grid;
   gap: 0.8rem;
-  max-width: 500px;
+  max-width: 540px;
 }
 
-label {
+label,
+.cover-panel {
   display: grid;
   gap: 0.4rem;
   font-weight: 600;
 }
 
 input,
-textarea {
+textarea,
+select {
   border: 1px solid #c7c7c7;
   border-radius: 6px;
   padding: 0.6rem;
   font: inherit;
 }
 
-.helper-text {
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 500;
+}
+
+.checkbox input {
+  width: auto;
+}
+
+.book-cover {
+  width: 150px;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.helper-text,
+.btn-secondary {
   color: #475467;
-  font-size: 0.9rem;
-  font-weight: 400;
+}
+
+.btn-secondary {
+  text-decoration: none;
 }
 
 button {
   width: fit-content;
-  background: #198754;
+  background: #0d6efd;
   color: #ffffff;
   border: none;
   border-radius: 6px;
@@ -50,11 +74,17 @@ button:disabled {
   opacity: 0.7;
 }
 
-.btn-secondary {
-  text-decoration: none;
-  color: #0d6efd;
-}
-
 .error {
   color: #b42318;
+}
+
+.success {
+  color: #067647;
+}
+
+@media (max-width: 640px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }

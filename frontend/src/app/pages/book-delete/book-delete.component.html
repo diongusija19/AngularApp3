@@ -13,6 +13,12 @@
 
   <ul *ngIf="!isLoading && books.length > 0" class="book-list">
     <li *ngFor="let book of books" class="book-item">
+      <img
+        *ngIf="book.coverImageUrl"
+        [src]="book.coverImageUrl"
+        [alt]="book.title + ' cover'"
+        class="book-cover"
+      />
       <div class="book-copy">
         <h2>{{ book.title }}</h2>
         <p><strong>Author:</strong> {{ book.author }}</p>

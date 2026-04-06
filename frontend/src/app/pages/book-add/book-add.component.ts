@@ -15,6 +15,7 @@ export class BookAddComponent {
 
   isSubmitting = false;
   errorMessage = '';
+  selectedFileName = 'No file selected';
 
   bookForm = this.formBuilder.group({
     title: ['', [Validators.required, Validators.maxLength(150)]],
@@ -45,7 +46,8 @@ export class BookAddComponent {
         title: title ?? '',
         author: author ?? '',
         description: description ?? '',
-        publishedYear: publishedYear ?? null
+        publishedYear: publishedYear ?? null,
+        coverFile: this.selectedFile ?? null
       })
       .subscribe({
         next: () => {
@@ -57,5 +59,15 @@ export class BookAddComponent {
           this.errorMessage = 'Failed to save the book.';
         }
       });
+  }
+
+  private selectedFile: File | null = null;
+
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const file = input.files?.[0] ?? null;
+
+    this.selectedFile = file;
+    this.selectedFileName = file ? file.name : 'No file selected';
   }
 }

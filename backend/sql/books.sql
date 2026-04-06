@@ -1,12 +1,15 @@
 CREATE DATABASE IF NOT EXISTS angular_app3_books;
 USE angular_app3_books;
 
+DROP TABLE IF EXISTS books;
+
 CREATE TABLE IF NOT EXISTS books (
   id INT AUTO_INCREMENT PRIMARY KEY,
   title VARCHAR(150) NOT NULL,
   author VARCHAR(120) NOT NULL,
   description TEXT NOT NULL,
   published_year INT NULL,
+  cover_image VARCHAR(255) NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 

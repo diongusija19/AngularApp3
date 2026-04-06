@@ -6,6 +6,7 @@
     </div>
     <div class="actions">
       <a routerLink="/add" class="btn">Add Book</a>
+      <a routerLink="/update" class="btn btn-secondary">Update Book</a>
       <a routerLink="/delete" class="btn btn-danger">Delete Book</a>
     </div>
   </header>
@@ -15,6 +16,12 @@
 
   <ul *ngIf="!isLoading && books.length > 0" class="book-list">
     <li *ngFor="let book of books" class="book-item">
+      <img
+        *ngIf="book.coverImageUrl"
+        [src]="book.coverImageUrl"
+        [alt]="book.title + ' cover'"
+        class="book-cover"
+      />
       <h2>{{ book.title }}</h2>
       <p><strong>Author:</strong> {{ book.author }}</p>
       <p><strong>Description:</strong> {{ book.description }}</p>

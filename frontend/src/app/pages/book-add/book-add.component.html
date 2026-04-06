@@ -25,6 +25,12 @@
       <input formControlName="publishedYear" type="number" min="0" />
     </label>
 
+    <label>
+      Cover Image
+      <input type="file" accept="image/*" (change)="onFileSelected($event)" />
+      <span class="helper-text">{{ selectedFileName }}</span>
+    </label>
+
     <p class="error" *ngIf="bookForm.invalid && bookForm.touched">Please complete required fields.</p>
     <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
 
