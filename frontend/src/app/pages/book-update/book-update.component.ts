@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Book } from '../../models/book.model';
 import { BookService } from '../../services/book.service';
 
@@ -32,7 +32,10 @@ export class BookUpdateComponent implements OnInit {
     removeCover: [false]
   });
 
-  constructor(private readonly bookService: BookService) {}
+  constructor(
+    private readonly bookService: BookService,
+    private readonly route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.loadBooks();
@@ -48,7 +51,14 @@ export class BookUpdateComponent implements OnInit {
         this.isLoading = false;
 
         if (books.length > 0) {
-          this.selectBook(books[0]);
+          const requestedBookId = Number(this.route.snapshot.queryParamMap.get('id'));
+          const requestedBook = books.find((book) => book.id === requestedBookId);
+
+          if (requestedBook) {
+            this.selectBook(requestedBook);
+          } else {
+            this.selectedBookId = null;
+          }
         }
       },
       error: () => {
@@ -58,12 +68,28 @@ export class BookUpdateComponent implements OnInit {
     });
   }
 
-  onBookChange(bookId: string): void {
-    const selectedBook = this.books.find((book) => book.id === Number(bookId));
-
-    if (selectedBook) {
-      this.selectBook(selectedBook);
+  toggleSelection(book: Book): void {
+    if (!book.id) {
+      return;
     }
+
+    if (this.selectedBookId === book.id) {
+      this.selectedBookId = null;
+      this.currentCoverUrl = null;
+      this.selectedFile = null;
+      this.selectedFileName = 'No file selected';
+      this.successMessage = '';
+      this.bookForm.reset({
+        title: '',
+        author: '',
+        description: '',
+        publishedYear: null,
+        removeCover: false
+      });
+      return;
+    }
+
+    this.selectBook(book);
   }
 
   onFileSelected(event: Event): void {

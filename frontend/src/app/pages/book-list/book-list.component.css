@@ -26,10 +26,24 @@
 }
 
 .book-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
   border: 1px solid #d9d9d9;
   border-radius: 10px;
   padding: 1rem;
   background: #ffffff;
+}
+
+.book-copy {
+  flex: 1;
+}
+
+.item-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-width: 110px;
 }
 
 .btn {
@@ -38,6 +52,10 @@
   text-decoration: none;
   padding: 0.5rem 0.8rem;
   border-radius: 6px;
+  border: none;
+  font: inherit;
+  text-align: center;
+  cursor: pointer;
 }
 
 .btn-danger {
@@ -61,9 +79,18 @@
   color: #b42318;
 }
 
+.success {
+  color: #067647;
+}
+
 @media (max-width: 640px) {
   .header {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .book-item,
+  .item-actions {
+    flex-direction: column;
   }
 }

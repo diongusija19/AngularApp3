@@ -13,7 +13,9 @@ import { Book } from '../../models/book.model';
 export class BookListComponent implements OnInit {
   books: Book[] = [];
   isLoading = true;
+  isDeleting = false;
   errorMessage = '';
+  successMessage = '';
 
   constructor(private readonly bookService: BookService) {}
 
@@ -34,6 +36,34 @@ export class BookListComponent implements OnInit {
       error: () => {
         this.errorMessage = 'Unable to load books from backend.';
         this.isLoading = false;
+      }
+    });
+  }
+
+  deleteBook(book: Book): void {
+    if (!book.id || this.isDeleting) {
+      return;
+    }
+
+    const confirmed = window.confirm(`Delete "${book.title}" by ${book.author}?`);
+
+    if (!confirmed) {
+      return;
+    }
+
+    this.isDeleting = true;
+    this.errorMessage = '';
+    this.successMessage = '';
+
+    this.bookService.deleteBook(book.id).subscribe({
+      next: () => {
+        this.successMessage = `"${book.title}" was deleted.`;
+        this.isDeleting = false;
+        this.loadBooks();
+      },
+      error: () => {
+        this.errorMessage = 'Failed to delete the selected book.';
+        this.isDeleting = false;
       }
     });
   }

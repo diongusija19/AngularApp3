@@ -13,6 +13,7 @@
 
   <p *ngIf="isLoading">Loading books...</p>
   <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+  <p class="success" *ngIf="successMessage">{{ successMessage }}</p>
 
   <ul *ngIf="!isLoading && books.length > 0" class="book-list">
     <li *ngFor="let book of books" class="book-item">
@@ -22,10 +23,18 @@
         [alt]="book.title + ' cover'"
         class="book-cover"
       />
-      <h2>{{ book.title }}</h2>
-      <p><strong>Author:</strong> {{ book.author }}</p>
-      <p><strong>Description:</strong> {{ book.description }}</p>
-      <p *ngIf="book.publishedYear"><strong>Year:</strong> {{ book.publishedYear }}</p>
+      <div class="book-copy">
+        <h2>{{ book.title }}</h2>
+        <p><strong>Author:</strong> {{ book.author }}</p>
+        <p><strong>Description:</strong> {{ book.description }}</p>
+        <p *ngIf="book.publishedYear"><strong>Year:</strong> {{ book.publishedYear }}</p>
+      </div>
+      <div class="item-actions">
+        <a [routerLink]="['/update']" [queryParams]="{ id: book.id }" class="btn btn-secondary">Update</a>
+        <button type="button" class="btn btn-danger" [disabled]="isDeleting" (click)="deleteBook(book)">
+          {{ isDeleting ? 'Deleting...' : 'Delete' }}
+        </button>
+      </div>
     </li>
   </ul>
 

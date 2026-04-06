@@ -11,13 +11,32 @@
   <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
   <p class="success" *ngIf="successMessage">{{ successMessage }}</p>
 
-  <form *ngIf="!isLoading && books.length > 0" [formGroup]="bookForm" (ngSubmit)="onSubmit()" class="form">
-    <label>
-      Select Book
-      <select [value]="selectedBookId ?? ''" (change)="onBookChange($any($event.target).value)">
-        <option *ngFor="let book of books" [value]="book.id">{{ book.title }} by {{ book.author }}</option>
-      </select>
-    </label>
+  <ul *ngIf="!isLoading && books.length > 0" class="book-list">
+    <li *ngFor="let book of books" class="book-item">
+      <label class="selector">
+        <input
+          type="checkbox"
+          [checked]="selectedBookId === book.id"
+          (change)="toggleSelection(book)"
+        />
+        <span>Select</span>
+      </label>
+      <img
+        *ngIf="book.coverImageUrl"
+        [src]="book.coverImageUrl"
+        [alt]="book.title + ' cover'"
+        class="list-cover"
+      />
+      <div class="book-copy">
+        <h2>{{ book.title }}</h2>
+        <p><strong>Author:</strong> {{ book.author }}</p>
+        <p><strong>Description:</strong> {{ book.description }}</p>
+        <p *ngIf="book.publishedYear"><strong>Year:</strong> {{ book.publishedYear }}</p>
+      </div>
+    </li>
+  </ul>
+
+  <form *ngIf="!isLoading && books.length > 0 && selectedBookId" [formGroup]="bookForm" (ngSubmit)="onSubmit()" class="form">
 
     <label>
       Title
@@ -59,6 +78,10 @@
 
     <button type="submit" [disabled]="isSubmitting">{{ isSubmitting ? 'Updating...' : 'Update Book' }}</button>
   </form>
+
+  <p *ngIf="!isLoading && books.length > 0 && !selectedBookId" class="helper-text">
+    Select one book with the checkbox before updating it.
+  </p>
 
   <p *ngIf="!isLoading && books.length === 0">No books are available to update yet.</p>
 </section>

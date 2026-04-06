@@ -11,8 +11,22 @@
   <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
   <p class="success" *ngIf="successMessage">{{ successMessage }}</p>
 
+  <div *ngIf="!isLoading && books.length > 0" class="toolbar">
+    <button type="button" (click)="deleteSelectedBook()" [disabled]="!selectedBookId || isDeleting">
+      {{ isDeleting ? 'Deleting...' : 'Delete Selected Book' }}
+    </button>
+  </div>
+
   <ul *ngIf="!isLoading && books.length > 0" class="book-list">
     <li *ngFor="let book of books" class="book-item">
+      <label class="selector">
+        <input
+          type="checkbox"
+          [checked]="selectedBookId === book.id"
+          (change)="toggleSelection(book.id)"
+        />
+        <span>Select</span>
+      </label>
       <img
         *ngIf="book.coverImageUrl"
         [src]="book.coverImageUrl"
@@ -25,9 +39,6 @@
         <p><strong>Description:</strong> {{ book.description }}</p>
         <p *ngIf="book.publishedYear"><strong>Year:</strong> {{ book.publishedYear }}</p>
       </div>
-      <button type="button" (click)="deleteBook(book)" [disabled]="isDeleting">
-        {{ isDeleting ? 'Deleting...' : 'Delete Book' }}
-      </button>
     </li>
   </ul>
 

@@ -12,6 +12,7 @@ import { Book } from '../../models/book.model';
 })
 export class BookDeleteComponent implements OnInit {
   books: Book[] = [];
+  selectedBookId: number | null = null;
   isLoading = true;
   isDeleting = false;
   errorMessage = '';
@@ -31,6 +32,7 @@ export class BookDeleteComponent implements OnInit {
     this.bookService.getBooks().subscribe({
       next: (books) => {
         this.books = books;
+        this.selectedBookId = null;
         this.isLoading = false;
       },
       error: () => {
@@ -40,8 +42,18 @@ export class BookDeleteComponent implements OnInit {
     });
   }
 
-  deleteBook(book: Book): void {
-    if (!book.id || this.isDeleting) {
+  toggleSelection(bookId: number | undefined): void {
+    if (!bookId) {
+      return;
+    }
+
+    this.selectedBookId = this.selectedBookId === bookId ? null : bookId;
+  }
+
+  deleteSelectedBook(): void {
+    const book = this.books.find((item) => item.id === this.selectedBookId);
+
+    if (!book?.id || this.isDeleting) {
       return;
     }
 
